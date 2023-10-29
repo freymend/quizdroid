@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Quiz Droid</string>
+    <string name="quiz_title_placeholder">Quiz Title</string>
+    <string-array name="quiz_titles">
+        <item>Math</item>
+        <item>Physics</item>
+        <item>Marvel Super Heroes</item>
+    </string-array>
 </resources>

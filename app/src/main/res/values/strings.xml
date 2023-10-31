@@ -32,10 +32,12 @@
     <string name="marvel_question_2">Marvel Question 2</string>
     <string name="math_question_2">Math Question 2</string>
     <string name="finish">Finish</string>
-    <string name="marvel_answer_1">Marvel Answer 1</string>
-    <string name="physics_answer_1">Physics Answer 1</string>
-    <string name="physics_answer_2">Physics Answer 2</string>
-    <string name="math_answer_2">Math Answer 2</string>
-    <string name="math_answer_1">Math Answer 1</string>
-    <string name="marvel_answer_2">Marvel Answer 2</string>
+    <string name="marvel_answer_1">The correct answer: Spiderman</string>
+    <string name="marvel_answer_2">The current answer: Spiderman</string>
+    <string name="physics_answer_1">The current answer: Gravity</string>
+    <string name="physics_answer_2">The current answer: Gravity</string>
+    <string name="math_answer_1">The current answer: Algebra</string>
+    <string name="math_answer_2">The current answer: Algebra</string>
+    <string name="answered">Your answer: %s</string>
+    <string name="correct">%d out of %d correct</string>
 </resources>

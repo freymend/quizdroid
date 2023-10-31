@@ -15,6 +15,9 @@
         <activity android:name=".questions.PhysicsActivity"/>
         <activity android:name=".questions.MathActivity"/>
         <activity android:name=".questions.MarvelActivity"/>
+        <activity android:name=".questions.MathQuestionActivity"/>
+        <activity android:name=".questions.MarvelQuestionActivity"/>
+        <activity android:name=".questions.PhysicsQuestionActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

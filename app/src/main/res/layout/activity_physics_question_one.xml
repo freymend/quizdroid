@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/physics_question_1"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RadioButton android:id="@+id/radio_python"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/python"/>
+            <RadioButton android:id="@+id/radio_verb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/verb"/>
+            <RadioButton android:id="@+id/radio_bacteria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bacteria"/>
+            <RadioButton android:id="@+id/radio_gravity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gravity"/>
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/submit"
+            android:enabled="false"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

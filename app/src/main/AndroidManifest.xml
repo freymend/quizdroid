@@ -15,9 +15,18 @@
         <activity android:name=".questions.PhysicsActivity"/>
         <activity android:name=".questions.MathActivity"/>
         <activity android:name=".questions.MarvelActivity"/>
-        <activity android:name=".questions.MathQuestionActivity"/>
-        <activity android:name=".questions.MarvelQuestionActivity"/>
-        <activity android:name=".questions.PhysicsQuestionActivity"/>
+        <activity android:name=".questions.MathQuestionOneActivity"/>
+        <activity android:name=".questions.MarvelQuestionOneActivity"/>
+        <activity android:name=".questions.PhysicsQuestionOneActivity"/>
+        <activity android:name=".questions.MathQuestionTwoActivity"/>
+        <activity android:name=".questions.MarvelQuestionTwoActivity"/>
+        <activity android:name=".questions.PhysicsQuestionTwoActivity"/>
+        <activity android:name=".questions.MathAnswerOneActivity"/>
+        <activity android:name=".questions.MarvelAnswerOneActivity"/>
+        <activity android:name=".questions.PhysicsAnswerOneActivity"/>
+        <activity android:name=".questions.MathAnswerTwoActivity"/>
+        <activity android:name=".questions.MarvelAnswerTwoActivity"/>
+        <activity android:name=".questions.PhysicsAnswerTwoActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        QuizApp.repository.load()
+
         val dataset = resources.getStringArray(R.array.quiz_titles)
         val quizAdapter = QuizAdapter(this, dataset)
 

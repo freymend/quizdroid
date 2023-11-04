@@ -12,12 +12,14 @@ import wedu.uw.ischool.zachaz.quizdroid.R
 
 private var score = 0
 private var total = 2
-private var currentAnswer= ""
+private var currentAnswer = ""
 
 class MarvelActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_marvel)
+        setContentView(R.layout.activity_topic_overview)
+
+        findViewById<TextView>(R.id.topic_description).text = resources.getString(R.string.marvel_description)
 
         findViewById<Button>(R.id.beginButton).setOnClickListener {
             val intent = Intent(this, MarvelQuestionOneActivity::class.java)

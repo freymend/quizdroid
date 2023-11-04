@@ -18,7 +18,9 @@ private var currentAnswer = ""
 class MathActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_math)
+        setContentView(R.layout.activity_topic_overview)
+
+        findViewById<TextView>(R.id.topic_description).text = resources.getString(R.string.math_description)
 
         findViewById<Button>(R.id.beginButton).setOnClickListener {
             val intent = Intent(this, MathQuestionOneActivity::class.java)

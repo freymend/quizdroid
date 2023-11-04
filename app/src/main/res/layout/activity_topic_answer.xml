@@ -7,32 +7,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/answer_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/math_answer_2"/>
+            android:text="@string/math_answer_1" />
 
         <TextView
-            android:id="@+id/answer"
+            android:id="@+id/response"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/answered"/>
+            android:text="@string/answered" />
 
         <TextView
-            android:id="@+id/correct"
+            android:id="@+id/number_correct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/correct"/>
+            android:text="@string/correct" />
 
         <Button
-            android:id="@+id/finishButton"
+            android:id="@+id/nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/finish"/>
+            android:text="@string/next" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

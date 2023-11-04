@@ -19,7 +19,8 @@ class PhysicsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_topic_overview)
 
-        findViewById<TextView>(R.id.topic_description).text = resources.getString(R.string.physics_description)
+        findViewById<TextView>(R.id.topic_description).text =
+            resources.getString(R.string.physics_description)
 
         findViewById<Button>(R.id.beginButton).setOnClickListener {
             val intent = Intent(this, PhysicsQuestionOneActivity::class.java)
@@ -33,13 +34,18 @@ class PhysicsQuestionOneActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_topic_question)
 
-        findViewById<TextView>(R.id.question).text = resources.getString(R.string.physics_question_1)
+        findViewById<TextView>(R.id.question).text =
+            resources.getString(R.string.physics_question_1)
 
         val answerGroup = findViewById<RadioGroup>(R.id.answerGroup)
-        answerGroup.findViewById<RadioButton>(R.id.answer_1).text = resources.getString(R.string.python)
-        answerGroup.findViewById<RadioButton>(R.id.answer_2).text = resources.getString(R.string.verb)
-        answerGroup.findViewById<RadioButton>(R.id.answer_3).text = resources.getString(R.string.bacteria)
-        answerGroup.findViewById<RadioButton>(R.id.answer_4).text = resources.getString(R.string.gravity)
+        answerGroup.findViewById<RadioButton>(R.id.answer_1).text =
+            resources.getString(R.string.python)
+        answerGroup.findViewById<RadioButton>(R.id.answer_2).text =
+            resources.getString(R.string.verb)
+        answerGroup.findViewById<RadioButton>(R.id.answer_3).text =
+            resources.getString(R.string.bacteria)
+        answerGroup.findViewById<RadioButton>(R.id.answer_4).text =
+            resources.getString(R.string.gravity)
 
         val submitButton = findViewById<Button>(R.id.submitButton)
         submitButton.setOnClickListener {
@@ -57,7 +63,10 @@ class PhysicsQuestionOneActivity : AppCompatActivity() {
 class PhysicsAnswerOneActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_physics_answer_one)
+        setContentView(R.layout.activity_topic_answer)
+
+        findViewById<TextView>(R.id.answer_text).text =
+            resources.getString(R.string.physics_answer_1)
 
         score = 0
         if (currentAnswer == "Gravity") {
@@ -65,10 +74,10 @@ class PhysicsAnswerOneActivity : AppCompatActivity() {
         }
 
         val answerText = resources.getString(R.string.answered, currentAnswer)
-        findViewById<TextView>(R.id.answer).text = answerText
+        findViewById<TextView>(R.id.response).text = answerText
 
         val correctText = resources.getString(R.string.correct, score, total)
-        findViewById<TextView>(R.id.correct).text = correctText
+        findViewById<TextView>(R.id.number_correct).text = correctText
 
         val nextButton = findViewById<Button>(R.id.nextButton)
         nextButton.setOnClickListener {
@@ -83,13 +92,18 @@ class PhysicsQuestionTwoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_topic_question)
 
-        findViewById<TextView>(R.id.question).text = resources.getString(R.string.physics_question_2)
+        findViewById<TextView>(R.id.question).text =
+            resources.getString(R.string.physics_question_2)
 
         val answerGroup = findViewById<RadioGroup>(R.id.answerGroup)
-        answerGroup.findViewById<RadioButton>(R.id.answer_1).text = resources.getString(R.string.python)
-        answerGroup.findViewById<RadioButton>(R.id.answer_2).text = resources.getString(R.string.verb)
-        answerGroup.findViewById<RadioButton>(R.id.answer_3).text = resources.getString(R.string.bacteria)
-        answerGroup.findViewById<RadioButton>(R.id.answer_4).text = resources.getString(R.string.gravity)
+        answerGroup.findViewById<RadioButton>(R.id.answer_1).text =
+            resources.getString(R.string.python)
+        answerGroup.findViewById<RadioButton>(R.id.answer_2).text =
+            resources.getString(R.string.verb)
+        answerGroup.findViewById<RadioButton>(R.id.answer_3).text =
+            resources.getString(R.string.bacteria)
+        answerGroup.findViewById<RadioButton>(R.id.answer_4).text =
+            resources.getString(R.string.gravity)
 
         val submitButton = findViewById<Button>(R.id.submitButton)
         submitButton.setOnClickListener {
@@ -107,19 +121,23 @@ class PhysicsQuestionTwoActivity : AppCompatActivity() {
 class PhysicsAnswerTwoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_physics_answer_two)
+        setContentView(R.layout.activity_topic_answer)
+
+        findViewById<TextView>(R.id.answer_text).text =
+            resources.getString(R.string.physics_answer_2)
 
         if (currentAnswer == "Gravity") {
             score++
         }
 
         val answerText = resources.getString(R.string.answered, currentAnswer)
-        findViewById<TextView>(R.id.answer).text = answerText
+        findViewById<TextView>(R.id.response).text = answerText
 
         val correctText = resources.getString(R.string.correct, score, total)
-        findViewById<TextView>(R.id.correct).text = correctText
+        findViewById<TextView>(R.id.number_correct).text = correctText
 
-        val finishButton = findViewById<Button>(R.id.finishButton)
+        val finishButton = findViewById<Button>(R.id.nextButton)
+        finishButton.text = resources.getString(R.string.finish)
         finishButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

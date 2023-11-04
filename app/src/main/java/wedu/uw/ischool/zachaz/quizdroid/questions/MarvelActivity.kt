@@ -19,13 +19,13 @@ class MarvelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_topic_overview)
 
-        findViewById<TextView>(R.id.topic_description).text = resources.getString(R.string.marvel_description)
+        findViewById<TextView>(R.id.topic_description).text =
+            resources.getString(R.string.marvel_description)
 
         findViewById<Button>(R.id.beginButton).setOnClickListener {
             val intent = Intent(this, MarvelQuestionOneActivity::class.java)
             startActivity(intent)
         }
-
     }
 }
 
@@ -37,10 +37,14 @@ class MarvelQuestionOneActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.question).text = resources.getString(R.string.marvel_question_1)
 
         val answerGroup = findViewById<RadioGroup>(R.id.answerGroup)
-        answerGroup.findViewById<RadioButton>(R.id.answer_1).text = resources.getString(R.string.spiderman)
-        answerGroup.findViewById<RadioButton>(R.id.answer_2).text = resources.getString(R.string.batman)
-        answerGroup.findViewById<RadioButton>(R.id.answer_3).text = resources.getString(R.string.he_man)
-        answerGroup.findViewById<RadioButton>(R.id.answer_4).text = resources.getString(R.string.ninjas)
+        answerGroup.findViewById<RadioButton>(R.id.answer_1).text =
+            resources.getString(R.string.spiderman)
+        answerGroup.findViewById<RadioButton>(R.id.answer_2).text =
+            resources.getString(R.string.batman)
+        answerGroup.findViewById<RadioButton>(R.id.answer_3).text =
+            resources.getString(R.string.he_man)
+        answerGroup.findViewById<RadioButton>(R.id.answer_4).text =
+            resources.getString(R.string.ninjas)
 
         val submitButton = findViewById<Button>(R.id.submitButton)
         submitButton.setOnClickListener {
@@ -58,7 +62,10 @@ class MarvelQuestionOneActivity : AppCompatActivity() {
 class MarvelAnswerOneActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_marvel_answer_one)
+        setContentView(R.layout.activity_topic_answer)
+
+        findViewById<TextView>(R.id.answer_text).text =
+            resources.getString(R.string.marvel_answer_1)
 
         score = 0
         if (currentAnswer == "Spiderman") {
@@ -66,10 +73,10 @@ class MarvelAnswerOneActivity : AppCompatActivity() {
         }
 
         val answerText = resources.getString(R.string.answered, currentAnswer)
-        findViewById<TextView>(R.id.answer).text = answerText
+        findViewById<TextView>(R.id.response).text = answerText
 
         val correctText = resources.getString(R.string.correct, score, total)
-        findViewById<TextView>(R.id.correct).text = correctText
+        findViewById<TextView>(R.id.number_correct).text = correctText
 
         val nextButton = findViewById<Button>(R.id.nextButton)
         nextButton.setOnClickListener {
@@ -87,10 +94,14 @@ class MarvelQuestionTwoActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.question).text = resources.getString(R.string.marvel_question_2)
 
         val answerGroup = findViewById<RadioGroup>(R.id.answerGroup)
-        answerGroup.findViewById<RadioButton>(R.id.answer_1).text = resources.getString(R.string.spiderman)
-        answerGroup.findViewById<RadioButton>(R.id.answer_2).text = resources.getString(R.string.batman)
-        answerGroup.findViewById<RadioButton>(R.id.answer_3).text = resources.getString(R.string.he_man)
-        answerGroup.findViewById<RadioButton>(R.id.answer_4).text = resources.getString(R.string.ninjas)
+        answerGroup.findViewById<RadioButton>(R.id.answer_1).text =
+            resources.getString(R.string.spiderman)
+        answerGroup.findViewById<RadioButton>(R.id.answer_2).text =
+            resources.getString(R.string.batman)
+        answerGroup.findViewById<RadioButton>(R.id.answer_3).text =
+            resources.getString(R.string.he_man)
+        answerGroup.findViewById<RadioButton>(R.id.answer_4).text =
+            resources.getString(R.string.ninjas)
 
         val submitButton = findViewById<Button>(R.id.submitButton)
         submitButton.setOnClickListener {
@@ -108,19 +119,23 @@ class MarvelQuestionTwoActivity : AppCompatActivity() {
 class MarvelAnswerTwoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_marvel_answer_two)
+        setContentView(R.layout.activity_topic_answer)
+
+        findViewById<TextView>(R.id.answer_text).text =
+            resources.getString(R.string.marvel_answer_2)
 
         if (currentAnswer == "Spiderman") {
             score++
         }
 
         val answerText = resources.getString(R.string.answered, currentAnswer)
-        findViewById<TextView>(R.id.answer).text = answerText
+        findViewById<TextView>(R.id.response).text = answerText
 
         val correctText = resources.getString(R.string.correct, score, total)
-        findViewById<TextView>(R.id.correct).text = correctText
+        findViewById<TextView>(R.id.number_correct).text = correctText
 
-        val finishButton = findViewById<Button>(R.id.finishButton)
+        val finishButton = findViewById<Button>(R.id.nextButton)
+        finishButton.text = resources.getString(R.string.finish)
         finishButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

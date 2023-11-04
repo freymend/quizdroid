@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.*
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,10 +19,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        QuizApp.repository.load()
+        QuizApp.repository.load(this)
 
-        val dataset = resources.getStringArray(R.array.quiz_titles)
-        val quizAdapter = QuizAdapter(this, dataset)
+        val quizAdapter = QuizAdapter(this)
 
         val recyclerView = findViewById<RecyclerView>(R.id.quiz_list)
         recyclerView.adapter = quizAdapter
@@ -31,10 +29,10 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-class QuizAdapter(private val context: Context, private val dataSet: Array<String>)
-    : RecyclerView.Adapter<QuizAdapter.ViewHolder>() {
+class QuizAdapter(private val context: Context) : RecyclerView.Adapter<QuizAdapter.ViewHolder>() {
+    private val dataSet = { QuizApp.repository.getQuizzes() }
 
-    class ViewHolder(private val context: Context, view: View): RecyclerView.ViewHolder(view) {
+    class ViewHolder(private val context: Context, view: View) : RecyclerView.ViewHolder(view) {
         private val textView = view.findViewById<TextView>(R.id.quiz_title)
 
         init {
@@ -47,6 +45,7 @@ class QuizAdapter(private val context: Context, private val dataSet: Array<Strin
                 ContextCompat.startActivity(context, intent, null)
             }
         }
+
         fun bind(word: String) {
             textView.text = word
         }
@@ -59,8 +58,8 @@ class QuizAdapter(private val context: Context, private val dataSet: Array<Strin
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(dataSet[position])
+        holder.bind(dataSet()[position])
     }
 
-    override fun getItemCount() = dataSet.size
+    override fun getItemCount() = dataSet().size
 }

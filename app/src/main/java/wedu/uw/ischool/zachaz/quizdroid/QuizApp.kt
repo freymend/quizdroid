@@ -1,6 +1,7 @@
 package wedu.uw.ischool.zachaz.quizdroid
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 
 data class Quiz(val question: String, val answers: List<String>, val correctAnswer: Int)
@@ -8,97 +9,103 @@ data class Quiz(val question: String, val answers: List<String>, val correctAnsw
 data class Topic(val title: String, val description: String, val questions: List<Quiz>)
 
 interface ITopicRepository {
-    fun load(): List<Topic>
+    fun load(context: Context)
+
+    fun getQuizzes(): List<String>
 }
 
 class TopicRepository : ITopicRepository {
-    private val topics = load()
-    override fun load(): List<Topic> {
+    private lateinit var topics: List<Topic>
+
+    override fun load(context: Context) {
         val marvelQuestions = listOf(
             Quiz(
-                R.string.marvel_question_1.toString(),
+                context.getString(R.string.marvel_question_1),
                 listOf(
-                    R.string.spiderman.toString(),
-                    R.string.batman.toString(),
-                    R.string.he_man.toString(),
-                    R.string.ninjas.toString()
+                    context.getString(R.string.spiderman),
+                    context.getString(R.string.batman),
+                    context.getString(R.string.he_man),
+                    context.getString(R.string.ninjas)
                 ),
                 0
             ),
             Quiz(
-                R.string.marvel_question_2.toString(),
+                context.getString(R.string.marvel_question_2),
                 listOf(
-                    R.string.spiderman.toString(),
-                    R.string.batman.toString(),
-                    R.string.he_man.toString(),
-                    R.string.ninjas.toString()
+                    context.getString(R.string.spiderman),
+                    context.getString(R.string.batman),
+                    context.getString(R.string.he_man),
+                    context.getString(R.string.ninjas)
                 ),
                 0
             )
         )
         val marvel = Topic(
-            R.string.marvel_super_heroes.toString(),
-            R.string.marvel_description.toString(),
+            context.getString(R.string.marvel_super_heroes),
+            context.getString(R.string.marvel_description),
             marvelQuestions
         )
 
         val physicsQuestions = listOf(
             Quiz(
-                R.string.physics_question_1.toString(),
+                context.getString(R.string.physics_question_1),
                 listOf(
-                    R.string.python.toString(),
-                    R.string.verb.toString(),
-                    R.string.bacteria.toString(),
-                    R.string.gravity.toString()
+                    context.getString(R.string.python),
+                    context.getString(R.string.verb),
+                    context.getString(R.string.bacteria),
+                    context.getString(R.string.gravity)
                 ),
                 3
             ),
             Quiz(
-                R.string.physics_question_2.toString(),
+                context.getString(R.string.physics_question_2),
                 listOf(
-                    R.string.python.toString(),
-                    R.string.verb.toString(),
-                    R.string.bacteria.toString(),
-                    R.string.gravity.toString()
+                    context.getString(R.string.python),
+                    context.getString(R.string.verb),
+                    context.getString(R.string.bacteria),
+                    context.getString(R.string.gravity)
                 ),
                 3
             )
         )
         val physics = Topic(
-            R.string.physics.toString(),
-            R.string.physics_description.toString(),
+            context.getString(R.string.physics),
+            context.getString(R.string.physics_description),
             physicsQuestions
         )
 
         val mathQuestions = listOf(
             Quiz(
-                R.string.math_question_1.toString(),
+                context.getString(R.string.math_question_1),
                 listOf(
-                    R.string.tree.toString(),
-                    R.string.algebra.toString(),
-                    R.string.earth.toString(),
-                    R.string.boom.toString()
+                    context.getString(R.string.tree),
+                    context.getString(R.string.algebra),
+                    context.getString(R.string.earth),
+                    context.getString(R.string.boom)
                 ),
                 1
             ),
             Quiz(
-                R.string.math_question_2.toString(),
+                context.getString(R.string.math_question_2),
                 listOf(
-                    R.string.tree.toString(),
-                    R.string.algebra.toString(),
-                    R.string.earth.toString(),
-                    R.string.boom.toString()
+                    context.getString(R.string.tree),
+                    context.getString(R.string.algebra),
+                    context.getString(R.string.earth),
+                    context.getString(R.string.boom)
                 ),
                 1
             )
         )
         val math = Topic(
-            R.string.math.toString(),
-            R.string.math_description.toString(),
+            context.getString(R.string.math),
+            context.getString(R.string.math_description),
             mathQuestions
         )
+        topics = listOf(marvel, physics, math)
+    }
 
-        return listOf(marvel, physics, math)
+    override fun getQuizzes(): List<String> {
+        return topics.map { topic -> topic.title }
     }
 }
 

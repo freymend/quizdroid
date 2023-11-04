@@ -2,7 +2,6 @@ package wedu.uw.ischool.zachaz.quizdroid.questions
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -32,7 +31,15 @@ class MathActivity : AppCompatActivity() {
 class MathQuestionOneActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_math_question_one)
+        setContentView(R.layout.activity_topic_question)
+
+        findViewById<TextView>(R.id.question).text = resources.getString(R.string.math_question_2)
+
+        val answerGroup = findViewById<RadioGroup>(R.id.answerGroup)
+        answerGroup.findViewById<RadioButton>(R.id.answer_1).text = resources.getString(R.string.tree)
+        answerGroup.findViewById<RadioButton>(R.id.answer_2).text = resources.getString(R.string.algebra)
+        answerGroup.findViewById<RadioButton>(R.id.answer_3).text = resources.getString(R.string.earth)
+        answerGroup.findViewById<RadioButton>(R.id.answer_4).text = resources.getString(R.string.boom)
 
         val submitButton = findViewById<Button>(R.id.submitButton)
         submitButton.setOnClickListener {
@@ -40,10 +47,9 @@ class MathQuestionOneActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        findViewById<RadioGroup>(R.id.radioGroup).setOnCheckedChangeListener { it, _ ->
+        answerGroup.setOnCheckedChangeListener { it, _ ->
             currentAnswer = it.findViewById<RadioButton>(it.checkedRadioButtonId).text.toString()
             submitButton.isEnabled = true
-            Log.i("currentAnswer", currentAnswer)
         }
     }
 }
@@ -75,7 +81,7 @@ class MathAnswerOneActivity : AppCompatActivity() {
 class MathQuestionTwoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_math_question_two)
+        setContentView(R.layout.activity_topic_question)
 
         val submitButton = findViewById<Button>(R.id.submitButton)
         submitButton.setOnClickListener {
@@ -83,10 +89,17 @@ class MathQuestionTwoActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        findViewById<RadioGroup>(R.id.radioGroup).setOnCheckedChangeListener { it, _ ->
+        findViewById<TextView>(R.id.question).text = resources.getString(R.string.math_question_2)
+
+        val answerGroup = findViewById<RadioGroup>(R.id.answerGroup)
+        answerGroup.findViewById<RadioButton>(R.id.answer_1).text = resources.getString(R.string.tree)
+        answerGroup.findViewById<RadioButton>(R.id.answer_2).text = resources.getString(R.string.algebra)
+        answerGroup.findViewById<RadioButton>(R.id.answer_3).text = resources.getString(R.string.earth)
+        answerGroup.findViewById<RadioButton>(R.id.answer_4).text = resources.getString(R.string.boom)
+
+        answerGroup.setOnCheckedChangeListener { it, _ ->
             currentAnswer = it.findViewById<RadioButton>(it.checkedRadioButtonId).text.toString()
             submitButton.isEnabled = true
-            Log.i("currentAnswer", currentAnswer)
         }
     }
 }

@@ -7,45 +7,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/marvel_question_1"/>
+            android:text="" />
 
         <RadioGroup
-            android:id="@+id/radioGroup"
+            android:id="@+id/answerGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <RadioButton android:id="@+id/radio_spiderman"
+
+            <RadioButton
+                android:id="@+id/answer_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/spiderman"/>
-            <RadioButton android:id="@+id/radio_batman"
+                android:text="" />
+
+            <RadioButton
+                android:id="@+id/answer_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/batman"/>
-            <RadioButton android:id="@+id/radio_heman"
+                android:text="" />
+
+            <RadioButton
+                android:id="@+id/answer_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/he_man"/>
-            <RadioButton android:id="@+id/radio_ninjas"
+                android:text="" />
+
+            <RadioButton
+                android:id="@+id/answer_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ninjas"/>
+                android:text="" />
         </RadioGroup>
 
         <Button
             android:id="@+id/submitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/submit"
-            android:enabled="false"/>
+            android:enabled="false"
+            android:text="@string/submit" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

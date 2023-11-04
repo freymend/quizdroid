@@ -40,4 +40,7 @@
     <string name="math_answer_2">The current answer: Algebra</string>
     <string name="answered">Your answer: %s</string>
     <string name="correct">%d out of %d correct</string>
+    <string name="math">Math</string>
+    <string name="physics">Physics</string>
+    <string name="marvel_super_heroes">Marvel Super Heroes</string>
 </resources>

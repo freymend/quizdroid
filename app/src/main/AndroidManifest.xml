@@ -15,21 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizDroid"
         tools:targetApi="31">
-        <activity android:name=".questions.PhysicsActivity"/>
-        <activity android:name=".questions.MathActivity"/>
-        <activity android:name=".questions.MarvelActivity"/>
-        <activity android:name=".questions.MathQuestionOneActivity"/>
-        <activity android:name=".questions.MarvelQuestionOneActivity"/>
-        <activity android:name=".questions.PhysicsQuestionOneActivity"/>
-        <activity android:name=".questions.MathQuestionTwoActivity"/>
-        <activity android:name=".questions.MarvelQuestionTwoActivity"/>
-        <activity android:name=".questions.PhysicsQuestionTwoActivity"/>
-        <activity android:name=".questions.MathAnswerOneActivity"/>
-        <activity android:name=".questions.MarvelAnswerOneActivity"/>
-        <activity android:name=".questions.PhysicsAnswerOneActivity"/>
-        <activity android:name=".questions.MathAnswerTwoActivity"/>
-        <activity android:name=".questions.MarvelAnswerTwoActivity"/>
-        <activity android:name=".questions.PhysicsAnswerTwoActivity"/>
+        <activity android:name=".questions.AnswerActivity"/>
+        <activity android:name=".questions.QuestionActivity"/>
+        <activity android:name=".questions.TopicActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

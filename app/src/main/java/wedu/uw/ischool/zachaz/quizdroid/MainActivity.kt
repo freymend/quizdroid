@@ -10,9 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import wedu.uw.ischool.zachaz.quizdroid.questions.MarvelActivity
-import wedu.uw.ischool.zachaz.quizdroid.questions.MathActivity
-import wedu.uw.ischool.zachaz.quizdroid.questions.PhysicsActivity
+import wedu.uw.ischool.zachaz.quizdroid.questions.TopicActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,18 +28,16 @@ class MainActivity : AppCompatActivity() {
 }
 
 class QuizAdapter(private val context: Context) : RecyclerView.Adapter<QuizAdapter.ViewHolder>() {
-    private val dataSet = { QuizApp.repository.getQuizzes() }
+    private val dataSet = { QuizApp.repository.getTopicsTitles() }
 
     class ViewHolder(private val context: Context, view: View) : RecyclerView.ViewHolder(view) {
         private val textView = view.findViewById<TextView>(R.id.quiz_title)
 
         init {
             view.setOnClickListener {
-                val intent = when (textView.text) {
-                    "Math" -> Intent(context, MathActivity::class.java)
-                    "Marvel Super Heroes" -> Intent(context, MarvelActivity::class.java)
-                    else -> Intent(context, PhysicsActivity::class.java)
-                }
+                val intent = Intent(context, TopicActivity::class.java)
+                intent.putExtra("topic", textView.text.toString())
+
                 ContextCompat.startActivity(context, intent, null)
             }
         }

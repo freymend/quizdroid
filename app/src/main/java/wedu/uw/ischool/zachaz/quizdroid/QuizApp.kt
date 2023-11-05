@@ -3,15 +3,20 @@ package wedu.uw.ischool.zachaz.quizdroid
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import java.io.Serializable
 
-data class Quiz(val question: String, val answers: List<String>, val correctAnswer: Int)
+data class Quiz(val question: String, val answers: List<String>, val correctAnswer: Int) : Serializable
 
-data class Topic(val title: String, val description: String, val questions: List<Quiz>)
+data class Topic(val title: String, val description: String, val questions: List<Quiz>) : Serializable
 
 interface ITopicRepository {
     fun load(context: Context)
 
-    fun getQuizzes(): List<String>
+    fun getTopicsTitles(): List<String>
+
+    fun getTopic(topic: String): Topic
+
+    fun getQuiz(topic: String, index: Int): Quiz
 }
 
 class TopicRepository : ITopicRepository {
@@ -104,8 +109,16 @@ class TopicRepository : ITopicRepository {
         topics = listOf(marvel, physics, math)
     }
 
-    override fun getQuizzes(): List<String> {
+    override fun getTopicsTitles(): List<String> {
         return topics.map { topic -> topic.title }
+    }
+
+    override fun getTopic(topic: String): Topic {
+        return topics.find { it.title == topic }!!
+    }
+
+    override fun getQuiz(topic: String, index: Int): Quiz {
+        return getTopic(topic).questions[index]
     }
 }
 

@@ -33,6 +33,7 @@
     <string name="physics_answer_2">The current answer: Gravity</string>
     <string name="math_answer_1">The current answer: Algebra</string>
     <string name="math_answer_2">The current answer: Algebra</string>
+    <string name="correct_answer">The correct answer: %s</string>
     <string name="answered">Your answer: %s</string>
     <string name="correct">%d out of %d correct</string>
     <string name="math">Math</string>

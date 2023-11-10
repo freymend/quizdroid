@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.*
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -27,6 +28,19 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.quiz_list)
         recyclerView.adapter = quizAdapter
 
+        loadPreferences()
+    }
+
+    private fun loadPreferences() {
+        val preferences = this.getSharedPreferences("quizdroid", Context.MODE_PRIVATE)
+        preferences.getString("url", "https://tednewardsandbox.site44.com/questions.json")?.let {
+            preferences.edit().putString("url", it).apply()
+        }
+        preferences.getString("minutes", "1").let {
+            preferences.edit().putString("minutes", it).apply()
+        }
+        Log.i("Preferences", "URL: ${preferences.getString("url", "")}")
+        Log.i("Preferences", "Minutes: ${preferences.getString("minutes", "")}")
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

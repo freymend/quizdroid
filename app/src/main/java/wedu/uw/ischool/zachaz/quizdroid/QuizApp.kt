@@ -32,10 +32,6 @@ class TopicRepository : ITopicRepository {
     private var topics = mutableListOf<Topic>()
 
     override fun load(context: Context) {
-        if (topics.isNotEmpty()) {
-            return
-        }
-
         val jsonData = context.assets.open("questions.json").bufferedReader().use {
             val text = it.readText()
             JSONArray(text)

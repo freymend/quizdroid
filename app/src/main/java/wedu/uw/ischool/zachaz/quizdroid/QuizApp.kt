@@ -3,8 +3,12 @@ package wedu.uw.ischool.zachaz.quizdroid
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import java.io.Serializable
+import java.net.URL
 
 data class Quiz(val question: String, val answers: List<String>, val correctAnswer: Int) :
     Serializable
@@ -15,6 +19,8 @@ data class Topic(val title: String, val description: String, val questions: List
 interface ITopicRepository {
     fun load(context: Context)
 
+    fun add(topic: Topic)
+
     fun getTopicsTitles(): List<String>
 
     fun getTopic(topic: String): Topic
@@ -23,7 +29,7 @@ interface ITopicRepository {
 }
 
 class TopicRepository : ITopicRepository {
-    private var topics: List<Topic> = mutableListOf()
+    private var topics = mutableListOf<Topic>()
 
     override fun load(context: Context) {
         if (topics.isNotEmpty()) {
@@ -35,36 +41,47 @@ class TopicRepository : ITopicRepository {
             JSONArray(text)
         }
 
-        for (i in 0 until jsonData.length()) {
-            val topic = jsonData.getJSONObject(i)
+        val topics = MutableList(jsonData.length()) { topic ->
+            val jsonTopic = jsonData.getJSONObject(topic)
+            val title = jsonTopic.getString("title")
+            val desc = jsonTopic.getString("desc")
 
-            val title = topic.getString("title")
-            val desc = topic.getString("desc")
+            val jsonQuestions = jsonTopic.getJSONArray("questions")
+            val quizList = List(jsonQuestions.length()) { question ->
+                val jsonQuestion = jsonQuestions.getJSONObject(question)
+                val questionText = jsonQuestion.getString("text")
+                val correctAnswer = jsonQuestion.getInt("answer")
 
-            val questions = topic.getJSONArray("questions")
-
-            val quizList = mutableListOf<Quiz>()
-
-            for (j in 0 until questions.length()) {
-                val question = questions.getJSONObject(j)
-
-                val questionText = question.getString("text")
-                val answers = question.getJSONArray("answers")
-
-                val answerList = mutableListOf<String>()
-
-                for (k in 0 until answers.length()) {
-                    answerList.add(answers.getString(k))
-                }
-                val correctAnswer = question.getInt("answer")
-                quizList.add(Quiz(questionText, answerList, correctAnswer))
+                val jsonAnswers = jsonQuestion.getJSONArray("answers")
+                val answerList =
+                    List<String>(jsonAnswers.length()) { answer ->
+                        jsonAnswers.getString(answer)
+                    }
+                Quiz(questionText, answerList, correctAnswer)
             }
-            topics += (listOf(Topic(title, desc, quizList)))
+            Topic(title, desc, quizList)
+        }
+
+        this.topics = topics
+    }
+
+    private fun getJSON() {
+        val jsonData = runBlocking {
+            val url = URL("https://tednewardsandbox.site44.com/questions.json")
+            withContext(Dispatchers.IO) {
+                url.openStream()
+            }.bufferedReader().use {
+                JSONArray(it.readText())
+            }
         }
     }
 
     override fun getTopicsTitles(): List<String> {
         return topics.map { topic -> topic.title }
+    }
+
+    override fun add(topic: Topic) {
+        topics.add(topic)
     }
 
     override fun getTopic(topic: String): Topic {

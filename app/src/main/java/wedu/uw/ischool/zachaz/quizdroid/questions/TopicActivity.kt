@@ -23,7 +23,11 @@ class TopicActivity : AppCompatActivity() {
                 topic.description
 
             findViewById<TextView>(R.id.questions).text =
-                resources.getString(R.string.questions, topic.questions.size)
+                resources.getQuantityString(
+                    R.plurals.questions,
+                    topic.questions.size,
+                    topic.questions.size
+                )
 
             findViewById<Button>(R.id.beginButton).setOnClickListener {
                 val intent = Intent(this, QuestionActivity::class.java)

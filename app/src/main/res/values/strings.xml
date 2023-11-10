@@ -5,11 +5,14 @@
     <string name="math_description">This is a basic description for math questions. You will be asked to answer questions about math</string>
     <string name="physics_description">This is a basic description for physics questions. You will be asked to answer questions about physics</string>
     <string name="begin_quiz">Begin</string>
-    <string name="questions">%d Questions</string>
+    <plurals name="questions">
+        <item quantity="one">%d Question</item>
+        <item quantity="other">%d Questions</item>
+    </plurals>
     <string name="next">Next</string>
     <string name="submit">Submit</string>
     <string name="finish">Finish</string>
-    <string name="correct_answer">The correct answer: %s</string>
+    <string name="correct_answer">Correct answer: %s</string>
     <string name="answered">Your answer: %s</string>
     <string name="correct">%d out of %d correct</string>
 </resources>

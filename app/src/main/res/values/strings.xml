@@ -16,4 +16,7 @@
     <string name="answered">Your answer: %s</string>
     <string name="correct">%d out of %d correct</string>
     <string name="preferences">Preferences</string>
+    <string name="url">URL</string>
+    <string name="minutes">Minutes</string>
+    <string name="save">Save</string>
 </resources>

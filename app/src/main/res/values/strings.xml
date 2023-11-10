@@ -5,7 +5,7 @@
     <string name="math_description">This is a basic description for math questions. You will be asked to answer questions about math</string>
     <string name="physics_description">This is a basic description for physics questions. You will be asked to answer questions about physics</string>
     <string name="begin_quiz">Begin</string>
-    <string name="questions">2 Questions</string>
+    <string name="questions">%d Questions</string>
     <string name="math_question_1">Math Question 1</string>
     <string name="physics_question_1">Physics Question 1</string>
     <string name="marvel_question_1">Marvel Question 1</string>

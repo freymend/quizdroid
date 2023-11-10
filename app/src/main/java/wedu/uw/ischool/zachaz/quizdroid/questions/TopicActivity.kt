@@ -22,6 +22,9 @@ class TopicActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.topic_description).text =
                 topic.description
 
+            findViewById<TextView>(R.id.questions).text =
+                resources.getString(R.string.questions, topic.questions.size)
+
             findViewById<Button>(R.id.beginButton).setOnClickListener {
                 val intent = Intent(this, QuestionActivity::class.java)
                 intent.putExtra("topic", topic)
@@ -48,10 +51,18 @@ class QuestionActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.question).text = quiz.question
 
             val answerGroup = findViewById<RadioGroup>(R.id.answerGroup)
-            answerGroup.findViewById<RadioButton>(R.id.answer_1).text = quiz.answers[0]
-            answerGroup.findViewById<RadioButton>(R.id.answer_2).text = quiz.answers[1]
-            answerGroup.findViewById<RadioButton>(R.id.answer_3).text = quiz.answers[2]
-            answerGroup.findViewById<RadioButton>(R.id.answer_4).text = quiz.answers[3]
+
+            for (answer in quiz.answers) {
+                val button = RadioButton(this)
+                button.text = answer
+                button.setTextAppearance(androidx.appcompat.R.style.TextAppearance_AppCompat_Body1)
+                button.layoutParams = RadioGroup.LayoutParams(
+                    RadioGroup.LayoutParams.WRAP_CONTENT,
+                    RadioGroup.LayoutParams.WRAP_CONTENT
+                )
+                button.setPadding(32, 32, 32, 32)
+                answerGroup.addView(button)
+            }
 
             val submitButton = findViewById<Button>(R.id.submitButton)
             var selectedIndex: Int? = null
@@ -91,7 +102,8 @@ class AnswerActivity : AppCompatActivity() {
                 score++
             }
 
-            val correctAnswer = resources.getString(R.string.correct_answer, quiz.answers[quiz.correctAnswer])
+            val correctAnswer =
+                resources.getString(R.string.correct_answer, quiz.answers[quiz.correctAnswer])
             findViewById<TextView>(R.id.answer_text).text = correctAnswer
 
             val answerText = resources.getString(R.string.answered, quiz.answers[answer])
@@ -110,6 +122,7 @@ class AnswerActivity : AppCompatActivity() {
                     intent.putExtra("score", score)
                     intent
                 }
+
                 else -> {
                     nextButton.text = resources.getString(R.string.finish)
                     Intent(this, MainActivity::class.java)

@@ -3,11 +3,14 @@ package wedu.uw.ischool.zachaz.quizdroid
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import org.json.JSONArray
 import java.io.Serializable
 
-data class Quiz(val question: String, val answers: List<String>, val correctAnswer: Int) : Serializable
+data class Quiz(val question: String, val answers: List<String>, val correctAnswer: Int) :
+    Serializable
 
-data class Topic(val title: String, val description: String, val questions: List<Quiz>) : Serializable
+data class Topic(val title: String, val description: String, val questions: List<Quiz>) :
+    Serializable
 
 interface ITopicRepository {
     fun load(context: Context)
@@ -20,93 +23,44 @@ interface ITopicRepository {
 }
 
 class TopicRepository : ITopicRepository {
-    private lateinit var topics: List<Topic>
+    private var topics: List<Topic> = mutableListOf()
 
     override fun load(context: Context) {
-        val marvelQuestions = listOf(
-            Quiz(
-                context.getString(R.string.marvel_question_1),
-                listOf(
-                    context.getString(R.string.spiderman),
-                    context.getString(R.string.batman),
-                    context.getString(R.string.he_man),
-                    context.getString(R.string.ninjas)
-                ),
-                0
-            ),
-            Quiz(
-                context.getString(R.string.marvel_question_2),
-                listOf(
-                    context.getString(R.string.spiderman),
-                    context.getString(R.string.batman),
-                    context.getString(R.string.he_man),
-                    context.getString(R.string.ninjas)
-                ),
-                0
-            )
-        )
-        val marvel = Topic(
-            context.getString(R.string.marvel_super_heroes),
-            context.getString(R.string.marvel_description),
-            marvelQuestions
-        )
+        if (topics.isNotEmpty()) {
+            return
+        }
 
-        val physicsQuestions = listOf(
-            Quiz(
-                context.getString(R.string.physics_question_1),
-                listOf(
-                    context.getString(R.string.python),
-                    context.getString(R.string.verb),
-                    context.getString(R.string.bacteria),
-                    context.getString(R.string.gravity)
-                ),
-                3
-            ),
-            Quiz(
-                context.getString(R.string.physics_question_2),
-                listOf(
-                    context.getString(R.string.python),
-                    context.getString(R.string.verb),
-                    context.getString(R.string.bacteria),
-                    context.getString(R.string.gravity)
-                ),
-                3
-            )
-        )
-        val physics = Topic(
-            context.getString(R.string.physics),
-            context.getString(R.string.physics_description),
-            physicsQuestions
-        )
+        val jsonData = context.assets.open("questions.json").bufferedReader().use {
+            val text = it.readText()
+            JSONArray(text)
+        }
 
-        val mathQuestions = listOf(
-            Quiz(
-                context.getString(R.string.math_question_1),
-                listOf(
-                    context.getString(R.string.tree),
-                    context.getString(R.string.algebra),
-                    context.getString(R.string.earth),
-                    context.getString(R.string.boom)
-                ),
-                1
-            ),
-            Quiz(
-                context.getString(R.string.math_question_2),
-                listOf(
-                    context.getString(R.string.tree),
-                    context.getString(R.string.algebra),
-                    context.getString(R.string.earth),
-                    context.getString(R.string.boom)
-                ),
-                1
-            )
-        )
-        val math = Topic(
-            context.getString(R.string.math),
-            context.getString(R.string.math_description),
-            mathQuestions
-        )
-        topics = listOf(marvel, physics, math)
+        for (i in 0 until jsonData.length()) {
+            val topic = jsonData.getJSONObject(i)
+
+            val title = topic.getString("title")
+            val desc = topic.getString("desc")
+
+            val questions = topic.getJSONArray("questions")
+
+            val quizList = mutableListOf<Quiz>()
+
+            for (j in 0 until questions.length()) {
+                val question = questions.getJSONObject(j)
+
+                val questionText = question.getString("text")
+                val answers = question.getJSONArray("answers")
+
+                val answerList = mutableListOf<String>()
+
+                for (k in 0 until answers.length()) {
+                    answerList.add(answers.getString(k))
+                }
+                val correctAnswer = question.getInt("answer")
+                quizList.add(Quiz(questionText, answerList, correctAnswer))
+            }
+            topics += (listOf(Topic(title, desc, quizList)))
+        }
     }
 
     override fun getTopicsTitles(): List<String> {

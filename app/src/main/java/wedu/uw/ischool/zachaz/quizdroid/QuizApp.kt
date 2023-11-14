@@ -32,10 +32,7 @@ class TopicRepository : ITopicRepository {
     private var topics = mutableListOf<Topic>()
 
     override fun load(context: Context) {
-        val jsonData = context.assets.open("questions.json").bufferedReader().use {
-            val text = it.readText()
-            JSONArray(text)
-        }
+        val jsonData = getJSON()
 
         val topics = MutableList(jsonData.length()) { topic ->
             val jsonTopic = jsonData.getJSONObject(topic)
@@ -61,8 +58,8 @@ class TopicRepository : ITopicRepository {
         this.topics = topics
     }
 
-    private fun getJSON() {
-        val jsonData = runBlocking {
+    private fun getJSON() : JSONArray {
+        return runBlocking {
             val url = URL("https://tednewardsandbox.site44.com/questions.json")
             withContext(Dispatchers.IO) {
                 url.openStream()

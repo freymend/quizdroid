@@ -2,13 +2,12 @@ package wedu.uw.ischool.zachaz.quizdroid
 
 import android.app.Application
 import android.content.Context
+import android.os.Environment
 import android.util.Log
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import org.json.JSONArray
+import java.io.File
 import java.io.Serializable
-import java.net.URL
 
 data class Quiz(val question: String, val answers: List<String>, val correctAnswer: Int) :
     Serializable
@@ -32,7 +31,7 @@ class TopicRepository : ITopicRepository {
     private var topics = mutableListOf<Topic>()
 
     override fun load(context: Context) {
-        val jsonData = getJSON()
+        val jsonData = getJSON(context)
 
         val topics = MutableList(jsonData.length()) { topic ->
             val jsonTopic = jsonData.getJSONObject(topic)
@@ -58,12 +57,13 @@ class TopicRepository : ITopicRepository {
         this.topics = topics
     }
 
-    private fun getJSON() : JSONArray {
+    private fun getJSON(context: Context) : JSONArray {
         return runBlocking {
-            val url = URL("https://tednewardsandbox.site44.com/questions.json")
-            withContext(Dispatchers.IO) {
-                url.openStream()
-            }.bufferedReader().use {
+            val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "questions.json")
+            if (file.exists()) {
+                return@runBlocking JSONArray(file.readText())
+            }
+            context.assets.open("questions.json").bufferedReader().use {
                 JSONArray(it.readText())
             }
         }
